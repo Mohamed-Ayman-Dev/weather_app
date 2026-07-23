@@ -9,6 +9,9 @@ class ApiException implements Exception {
 
   const ApiException({required this.message, this.statusCode, this.data});
 
+  /// if status code is null means ( no internet connection or timeout ... ), fallback to cache
+  bool get shouldFallbackToCache => statusCode == null;
+
   factory ApiException.fromDioException(DioException exception) {
     final statusCode = exception.response?.statusCode;
     final responseData = _decode(exception.response?.data);

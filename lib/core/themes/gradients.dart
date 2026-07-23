@@ -2,7 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'colors.dart';
 
-abstract class AppGradients {
+abstract final class AppGradients {
+  AppGradients._();
+
+  static const bkGradient = RadialGradient(
+    center: Alignment(-0.8, -0.9),
+    radius: 1.3,
+    colors: [Color(0xFF45278B), Color(0xFF2E335A)],
+  );
+
   static const buttonGradient = LinearGradient(
     colors: [AppColors.secondaryColor, AppColors.primaryColor],
     begin: Alignment.topLeft,

@@ -7,26 +7,48 @@ class WeatherError extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(24),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(22),
+        decoration: BoxDecoration(
+          color: Colors.redAccent.withOpacity(.07),
+          borderRadius: BorderRadius.circular(28),
+          border: Border.all(color: Colors.redAccent.withOpacity(.35)),
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              Icons.error_outline_rounded,
-              size: 64,
-              color: theme.colorScheme.error,
+            // const Text('⛈️', style: TextStyle(fontSize: 60)),
+            const SizedBox(height: 18),
+            const Text(
+              "Couldn't find that city",
+              textAlign: TextAlign.center,
+
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Color(0xffFFB3BE),
+              ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 12),
             Text(
               message,
               textAlign: TextAlign.center,
-              style: theme.textTheme.bodyLarge?.copyWith(
-                color: theme.colorScheme.error,
+              style: const TextStyle(color: Colors.white70, fontSize: 14),
+            ),
+            const SizedBox(height: 28),
+            FilledButton(
+              style: FilledButton.styleFrom(
+                backgroundColor: Colors.white.withOpacity(.12),
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                minimumSize: const Size(160, 52),
               ),
+              onPressed: () {},
+              child: const Text('Try Again', style: TextStyle(fontSize: 14)),
             ),
           ],
         ),

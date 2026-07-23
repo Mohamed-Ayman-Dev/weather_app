@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/weather_provider.dart';
+import '../widgets/gradient_background.dart';
 import '../widgets/weather_card.dart';
 import '../widgets/weather_error.dart';
 import '../widgets/weather_search_field.dart';
@@ -27,20 +28,23 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Current Weather')),
-      body: SafeArea(
-        child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 450),
-            child: Padding(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  _buildSearchField(),
-                  const SizedBox(height: 32),
-                  _buildWeatherSection(),
-                ],
+      body: GradientBackground(
+        child: SafeArea(
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 450),
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      _buildSearchField(),
+                      const SizedBox(height: 32),
+                      _buildWeatherSection(),
+                    ],
+                  ),
+                ),
               ),
             ),
           ),

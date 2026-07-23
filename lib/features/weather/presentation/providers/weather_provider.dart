@@ -31,6 +31,7 @@ class WeatherProvider extends ChangeNotifier {
         weather = weatherData;
       },
       failure: (error) {
+        weather = null;
         errorMessage = error.message;
       },
     );

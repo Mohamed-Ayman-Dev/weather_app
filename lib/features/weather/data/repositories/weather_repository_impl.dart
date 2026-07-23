@@ -25,9 +25,11 @@ class WeatherRepositoryImpl implements WeatherRepository {
       _localDataSource.cacheWeather(weather);
       return ApiResult.success(weather);
     } on ApiException catch (e) {
-      final cachedWeather = await _localDataSource.getLastCachedWeather();
-      if (cachedWeather != null) {
-        return ApiResult.success(cachedWeather.copyWith(isFromCache: true));
+      if (e.shouldFallbackToCache) {
+        final cachedWeather = await _localDataSource.getLastCachedWeather();
+        if (cachedWeather != null) {
+          return ApiResult.success(cachedWeather.copyWith(isFromCache: true));
+        }
       }
       return ApiResult.failure(e);
     }
