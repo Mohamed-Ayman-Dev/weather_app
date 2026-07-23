@@ -4,5 +4,6 @@ final class AppConstant {
 
   static const String fontFamily = 'Almarai';
   static const String appName = 'Invastro';
+  static const String cacheKey = 'last_weather_result';
 
 }

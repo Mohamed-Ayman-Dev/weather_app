@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
 
+import 'package:provider/provider.dart';
+
+import '../providers/weather_provider.dart';
+import '../widgets/weather_card.dart';
+import '../widgets/weather_error.dart';
+import '../widgets/weather_search_field.dart';
+
 class HomeScreen extends StatefulWidget {
   static const routeName = '/home';
 
@@ -21,29 +28,22 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final provider = context.watch<WeatherProvider>();
-
     return Scaffold(
-      appBar: AppBar(title: const Text('Weather')),
+      appBar: AppBar(
+        title: const Text('Current Weather'),
+      ),
       body: SafeArea(
         child: Center(
-          // Bonus: responsive design — caps content width on large/tablet
-          // screens instead of letting the search field and card stretch
-          // edge-to-edge.
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 480),
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(16),
+            constraints: const BoxConstraints(maxWidth: 450),
+            child: Padding(
+              padding: const EdgeInsets.all(24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // WeatherSearchField(
-                  //   controller: _cityController,
-                  //   isLoading: provider.state == WeatherViewState.loading,
-                  //   onSearch: (city) => provider.searchCity(city),
-                  // ),
-                  // const SizedBox(height: 24),
-                  // _buildResultArea(provider),
+                  _buildSearchField(),
+                  const SizedBox(height: 32),
+                  _buildWeatherSection(),
                 ],
               ),
             ),
@@ -53,19 +53,39 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // Widget _buildResultArea(WeatherProvider provider) {
-  //   switch (provider.state) {
-  //     case WeatherViewState.idle:
-  //       return const SizedBox.shrink();
-  //     case WeatherViewState.loading:
-  //       return const Padding(
-  //         padding: EdgeInsets.only(top: 32),
-  //         child: Center(child: CircularProgressIndicator()),
-  //       );
-  //     case WeatherViewState.success:
-  //       return WeatherDisplayCard(weather: provider.weather!);
-  //     case WeatherViewState.error:
-  //       return WeatherErrorView(message: provider.errorMessage!);
-  //   }
-  // }
+  Widget _buildSearchField() {
+    return Selector<WeatherProvider, bool>(
+      selector: (_, provider) => provider.isLoading,
+      builder: (_, isLoading, __) {
+        return WeatherSearchField(
+          controller: _cityController,
+          isLoading: isLoading,
+          onSearch: context.read<WeatherProvider>().searchCity,
+        );
+      },
+    );
+  }
+
+  Widget _buildWeatherSection() {
+    return Selector<WeatherProvider, WeatherProvider>(
+      selector: (_, provider) => provider,
+      builder: (_, provider, __) {
+        if (provider.isLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+
+        if (provider.weather != null) {
+          return WeatherCard(weather: provider.weather!);
+        }
+
+        if (provider.errorMessage != null) {
+          return WeatherError(message: provider.errorMessage!);
+        }
+
+        return const SizedBox.shrink();
+      },
+    );
+  }
 }

@@ -1,8 +1,5 @@
 import 'dart:async';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:weather_app/features/weather/presentation/screens/home_screen.dart';
 
 import '../../../../core/di/locator_service.dart';

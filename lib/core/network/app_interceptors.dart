@@ -1,23 +1,33 @@
 import 'package:dio/dio.dart';
-import '../error/on_error_helper.dart';
 
 class AppInterceptors extends Interceptor {
-  final OnErrorHelper _onErrorHelper;
-
-  AppInterceptors({required OnErrorHelper onErrorHelper})
-    : _onErrorHelper = onErrorHelper;
-
   @override
   void onRequest(
-    RequestOptions options,
-    RequestInterceptorHandler handler,
-  ) async {
-    /// Add headers to the request
+      RequestOptions options,
+      RequestInterceptorHandler handler,
+      ) {
+    // Common headers for all requests.
+    options.headers.addAll({
+      'Accept': 'application/json',
+    });
+
     handler.next(options);
   }
 
   @override
-  void onError(DioException err, ErrorInterceptorHandler handler) {
-    return _onErrorHelper.onError(err, handler);
+  void onResponse(
+      Response response,
+      ResponseInterceptorHandler handler,
+      ) {
+    handler.next(response);
+  }
+
+  @override
+  void onError(
+      DioException err,
+      ErrorInterceptorHandler handler,
+      ) {
+    // Let ApiClient convert DioException into ApiException.
+    handler.next(err);
   }
 }

@@ -1,2 +1,2 @@
 // --------------------------- Enums ---------------------------
-enum WeatherViewState { idle, loading, success, error }
+// enum WeatherViewState { idle, loading, success, error }

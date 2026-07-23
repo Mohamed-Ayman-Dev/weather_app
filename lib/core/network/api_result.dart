@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import '../error/exceptions.dart';
 
 sealed class ApiResult<T> {
@@ -38,17 +36,6 @@ sealed class ApiResult<T> {
     }
   }
 
-  Future<void> whenOrThrowError({
-    required FutureOr<void> Function(T data) success,
-    String? errorMessage,
-  }) async {
-    if (this is Success<T>) {
-      await success((this as Success<T>).data);
-    } else {
-      final error = (this as Failure<T>).error;
-      throw errorMessage ?? error;
-    }
-  }
 }
 
 final class Success<T> extends ApiResult<T> {

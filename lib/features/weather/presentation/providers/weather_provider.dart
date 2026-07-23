@@ -1,5 +1,7 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
+import '../../../../core/network/api_result.dart';
+import '../../data/models/weather_model.dart';
 import '../../data/repositories/weather_repository.dart';
 
 class WeatherProvider extends ChangeNotifier {
@@ -7,39 +9,39 @@ class WeatherProvider extends ChangeNotifier {
 
   final WeatherRepository _repository;
 
-  // WeatherViewState _state = WeatherViewState.idle;
-  // WeatherOldModel? _weather;
-  // String? _errorMessage;
-  //
-  // WeatherViewState get state => _state;
-  // WeatherOldModel? get weather => _weather;
-  // String? get errorMessage => _errorMessage;
-  //
-  // Future<void> searchCity(String rawCityName) async {
-  //   final cityName = rawCityName.trim();
-  //
-  //   if (cityName.isEmpty) {
-  //     _state = WeatherViewState.error;
-  //     _errorMessage = 'Please enter a city name.';
-  //     notifyListeners();
-  //     return;
-  //   }
-  //
-  //   _state = WeatherViewState.loading;
-  //   _errorMessage = null;
-  //   notifyListeners();
-  //
-  //   final result = await _repository.getWeatherForCity(cityName);
-  //
-  //   switch (result) {
-  //     case ApiSuccess<WeatherOldModel>(:final data):
-  //       _weather = data;
-  //       _state = WeatherViewState.success;
-  //     case ApiFailure<WeatherOldModel>(:final message):
-  //       _errorMessage = message;
-  //       _state = WeatherViewState.error;
-  //   }
-  //
-  //   notifyListeners();
-  // }
+  bool isLoading = false;
+  WeatherModel? weather;
+  String? errorMessage;
+
+  Future<void> searchCity(String cityName) async {
+    final city = cityName.trim();
+    // Validate the user input before making the API request.
+    if (city.isEmpty) {
+      errorMessage = 'Please enter a city name.';
+      notifyListeners();
+      return;
+    }
+    isLoading = true;
+    errorMessage = null;
+    notifyListeners();
+
+    final result = await _repository.getCurrentWeather(city);
+    // Update the UI based on the repository result.
+    result.when(
+      success: (weatherData) {
+       weather = weatherData;
+      },
+      failure: (error) {
+        errorMessage = error.message;
+      },
+    );
+    isLoading = false;
+    notifyListeners();
+  }
+
+  void clear() {
+    weather = null;
+    errorMessage = null;
+    notifyListeners();
+  }
 }
