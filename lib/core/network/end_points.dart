@@ -9,12 +9,10 @@ final class EndPoints {
   /// used to keep configuration out of source control, but it does not
   /// make client-side API keys secret.
   static const String apiKey = '6f27a7b9512c4882a45162444252101';
+
   /// Weather
   static const String currentWeather = '/current.json';
-
 }
 
 // static const String baseUrl = String.fromEnvironment('BASEURL');
 // static const String apiKey = String.fromEnvironment('API_KEY');
-
-

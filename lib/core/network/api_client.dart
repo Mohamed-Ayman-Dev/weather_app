@@ -44,7 +44,7 @@ class ApiClient {
       );
     } on DioException catch (e) {
       throw ApiException.fromDioException(e);
-    }catch (e, stackTrace) {
+    } catch (e, stackTrace) {
       Error.throwWithStackTrace(
         ApiException(message: e.toString()),
         stackTrace,
@@ -76,7 +76,7 @@ class ApiClient {
       );
     } on DioException catch (e) {
       throw ApiException.fromDioException(e);
-    }catch (e, stackTrace) {
+    } catch (e, stackTrace) {
       Error.throwWithStackTrace(
         ApiException(message: e.toString()),
         stackTrace,
@@ -84,14 +84,13 @@ class ApiClient {
     }
   }
 
-
   Future<ApiResponse> put(
-      String path, {
-        Map<String, dynamic>? data,
-        Map<String, dynamic>? queryParameters,
-        CancelToken? cancelToken,
-        Options? options,
-      }) async {
+    String path, {
+    Map<String, dynamic>? data,
+    Map<String, dynamic>? queryParameters,
+    CancelToken? cancelToken,
+    Options? options,
+  }) async {
     try {
       final response = await dio.put(
         path,
@@ -116,11 +115,11 @@ class ApiClient {
   }
 
   Future<ApiResponse> delete(
-      String path, {
-        Map<String, dynamic>? queryParameters,
-        CancelToken? cancelToken,
-        Options? options,
-      }) async {
+    String path, {
+    Map<String, dynamic>? queryParameters,
+    CancelToken? cancelToken,
+    Options? options,
+  }) async {
     try {
       final response = await dio.delete(
         path,
@@ -135,12 +134,11 @@ class ApiClient {
       );
     } on DioException catch (e) {
       throw ApiException.fromDioException(e);
-    }catch (e, stackTrace) {
+    } catch (e, stackTrace) {
       Error.throwWithStackTrace(
         ApiException(message: e.toString()),
         stackTrace,
       );
     }
   }
-
 }

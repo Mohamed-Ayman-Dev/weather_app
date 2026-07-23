@@ -2,17 +2,12 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
-
 class ApiException implements Exception {
   final String message;
   final int? statusCode;
   final dynamic data;
 
-  const ApiException({
-    required this.message,
-    this.statusCode,
-    this.data,
-  });
+  const ApiException({required this.message, this.statusCode, this.data});
 
   factory ApiException.fromDioException(DioException exception) {
     final statusCode = exception.response?.statusCode;
@@ -36,12 +31,10 @@ class ApiException implements Exception {
     return data;
   }
 
-  static String _extractMessage(
-      DioException exception,
-      dynamic responseData,
-      ) {
+  static String _extractMessage(DioException exception, dynamic responseData) {
     if (responseData is Map<String, dynamic>) {
-      final backendMessage = responseData['message'] ??
+      final backendMessage =
+          responseData['message'] ??
           responseData['msg'] ??
           responseData['error']?['message'];
 
@@ -67,8 +60,7 @@ class ApiException implements Exception {
         return 'Request cancelled.';
 
       case DioExceptionType.badResponse:
-        return exception.message ??
-            'Request failed.';
+        return exception.message ?? 'Request failed.';
       default:
         return 'Something went wrong.';
     }

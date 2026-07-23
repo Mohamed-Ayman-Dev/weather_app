@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:weather_app/features/weather/presentation/screens/home_screen.dart';
 
@@ -14,7 +15,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   Future<void> _hideScreen() async {
     Future.delayed(const Duration(milliseconds: 50), () {
       setState(() {
@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
     myScreen = const HomeScreen();
     myRoute = HomeScreen.routeName;
     Timer(const Duration(milliseconds: 1000), () async {
-      await LocatorService.navigationService.currentState!.pushReplacement(
+      await LocatorService.navigationService.currentState?.pushReplacement(
         PageRouteBuilder(
           opaque: true,
           settings: RouteSettings(name: myRoute),

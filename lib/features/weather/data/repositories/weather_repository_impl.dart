@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/network/api_result.dart';
 import '../datasources/weather_local_data_source.dart';
@@ -10,8 +11,8 @@ class WeatherRepositoryImpl implements WeatherRepository {
   WeatherRepositoryImpl({
     required WeatherRemoteDataSource remoteDataSource,
     required WeatherLocalDataSource localDataSource,
-  })  : _remoteDataSource = remoteDataSource,
-        _localDataSource = localDataSource;
+  }) : _remoteDataSource = remoteDataSource,
+       _localDataSource = localDataSource;
 
   final WeatherRemoteDataSource _remoteDataSource;
   final WeatherLocalDataSource _localDataSource;
@@ -26,9 +27,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
     } on ApiException catch (e) {
       final cachedWeather = await _localDataSource.getLastCachedWeather();
       if (cachedWeather != null) {
-        return ApiResult.success(
-          cachedWeather.copyWith(isFromCache: true),
-        );
+        return ApiResult.success(cachedWeather.copyWith(isFromCache: true));
       }
       return ApiResult.failure(e);
     }

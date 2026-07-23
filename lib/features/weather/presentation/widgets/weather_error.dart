@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
 class WeatherError extends StatelessWidget {
-  const WeatherError({
-    super.key,
-    required this.message,
-  });
+  const WeatherError({super.key, required this.message});
 
   final String message;
 

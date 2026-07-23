@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:weather_app/core/constants/app_constant.dart';
@@ -10,7 +9,7 @@ import '../models/weather_model.dart';
 /// shared [CacheHelper]. Only knows about storage — the repository decides
 /// when to call it and what "isFromCache" means for the UI.
 
-class WeatherLocalDataSource  {
+class WeatherLocalDataSource {
   WeatherLocalDataSource(this._cacheHelper);
 
   final CacheHelper _cacheHelper;
@@ -29,7 +28,9 @@ class WeatherLocalDataSource  {
     if (raw == null) return null;
 
     try {
-      return WeatherModel.fromCacheJson(jsonDecode(raw) as Map<String, dynamic>);
+      return WeatherModel.fromCacheJson(
+        jsonDecode(raw) as Map<String, dynamic>,
+      );
     } catch (_) {
       // Corrupted cache entry — treat as no cache rather than crashing.
       return null;

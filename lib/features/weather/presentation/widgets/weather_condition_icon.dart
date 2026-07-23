@@ -2,10 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class WeatherConditionIcon extends StatelessWidget {
-  const WeatherConditionIcon({
-    super.key,
-    required this.iconUrl,
-  });
+  const WeatherConditionIcon({super.key, required this.iconUrl});
 
   final String? iconUrl;
 
@@ -19,14 +16,9 @@ class WeatherConditionIcon extends StatelessWidget {
       placeholder: (_, __) => const SizedBox(
         width: 72,
         height: 72,
-        child: Center(
-          child: CircularProgressIndicator(strokeWidth: 2),
-        ),
+        child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
       ),
-      errorWidget: (_, __, ___) => const Icon(
-        Icons.cloud_outlined,
-        size: 72,
-      ),
+      errorWidget: (_, __, ___) => const Icon(Icons.cloud_outlined, size: 72),
     );
   }
 }

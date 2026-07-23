@@ -4,10 +4,7 @@ import '../../data/models/weather_model.dart';
 import 'weather_condition_icon.dart';
 
 class WeatherCard extends StatelessWidget {
-  const WeatherCard({
-    super.key,
-    required this.weather,
-  });
+  const WeatherCard({super.key, required this.weather});
 
   final WeatherModel weather;
 
@@ -17,9 +14,7 @@ class WeatherCard extends StatelessWidget {
 
     return Card(
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
@@ -29,10 +24,7 @@ class WeatherCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 20),
                 child: Chip(
-                  avatar: const Icon(
-                    Icons.cloud_off,
-                    size: 18,
-                  ),
+                  avatar: const Icon(Icons.cloud_off, size: 18),
                   label: const Text('Showing cached result'),
                 ),
               ),
@@ -55,9 +47,7 @@ class WeatherCard extends StatelessWidget {
 
             const SizedBox(height: 24),
 
-            WeatherConditionIcon(
-              iconUrl: weather.conditionIconUrl,
-            ),
+            WeatherConditionIcon(iconUrl: weather.conditionIconUrl),
 
             const SizedBox(height: 16),
 

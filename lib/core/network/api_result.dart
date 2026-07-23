@@ -35,7 +35,6 @@ sealed class ApiResult<T> {
       return failure((this as Failure<T>).error);
     }
   }
-
 }
 
 final class Success<T> extends ApiResult<T> {

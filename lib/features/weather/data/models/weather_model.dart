@@ -37,41 +37,39 @@ class WeatherModel {
       temperatureC: (current?['temp_c'] as num?)?.toDouble(),
       conditionText: condition?['text'] as String?,
       // The API returns protocol-relative URLs like "//cdn.weatherapi.com/...".
-      conditionIconUrl:
-      rawIcon?.startsWith('//') == true
+      conditionIconUrl: rawIcon?.startsWith('//') == true
           ? 'https:$rawIcon'
           : rawIcon,
       conditionCode: condition?['code'] as int?,
     );
   }
 
-
   WeatherModel copyWith({bool? isFromCache}) => WeatherModel(
-        cityName: cityName,
-        country: country,
-        temperatureC: temperatureC,
-        conditionText: conditionText,
-        conditionIconUrl: conditionIconUrl,
-        conditionCode: conditionCode,
-        isFromCache: isFromCache ?? this.isFromCache,
-      );
+    cityName: cityName,
+    country: country,
+    temperatureC: temperatureC,
+    conditionText: conditionText,
+    conditionIconUrl: conditionIconUrl,
+    conditionCode: conditionCode,
+    isFromCache: isFromCache ?? this.isFromCache,
+  );
 
   Map<String, dynamic> toCacheJson() => {
-        'cityName': cityName,
-        'country': country,
-        'temperatureC': temperatureC,
-        'conditionText': conditionText,
-        'conditionIconUrl': conditionIconUrl,
-        'conditionCode': conditionCode,
-      };
+    'cityName': cityName,
+    'country': country,
+    'temperatureC': temperatureC,
+    'conditionText': conditionText,
+    'conditionIconUrl': conditionIconUrl,
+    'conditionCode': conditionCode,
+  };
 
   factory WeatherModel.fromCacheJson(Map<String, dynamic> json) => WeatherModel(
-        cityName: json['cityName'] as String?,
-        country: json['country'] as String?,
-        temperatureC: (json['temperatureC'] as num?)?.toDouble(),
-        conditionText: json['conditionText'] as String?,
-        conditionIconUrl: json['conditionIconUrl'] as String?,
-        conditionCode: json['conditionCode'] as int?,
-        isFromCache: true,
-      );
+    cityName: json['cityName'] as String?,
+    country: json['country'] as String?,
+    temperatureC: (json['temperatureC'] as num?)?.toDouble(),
+    conditionText: json['conditionText'] as String?,
+    conditionIconUrl: json['conditionIconUrl'] as String?,
+    conditionCode: json['conditionCode'] as int?,
+    isFromCache: true,
+  );
 }

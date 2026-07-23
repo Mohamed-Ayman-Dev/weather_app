@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/network/api_result.dart';
 import '../../data/models/weather_model.dart';
 import '../../data/repositories/weather_repository.dart';
 
@@ -29,7 +28,7 @@ class WeatherProvider extends ChangeNotifier {
     // Update the UI based on the repository result.
     result.when(
       success: (weatherData) {
-       weather = weatherData;
+        weather = weatherData;
       },
       failure: (error) {
         errorMessage = error.message;

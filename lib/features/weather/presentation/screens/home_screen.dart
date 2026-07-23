@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-
 import 'package:provider/provider.dart';
 
 import '../providers/weather_provider.dart';
@@ -29,9 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Current Weather'),
-      ),
+      appBar: AppBar(title: const Text('Current Weather')),
       body: SafeArea(
         child: Center(
           child: ConstrainedBox(
@@ -67,13 +63,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildWeatherSection() {
-    return Selector<WeatherProvider, WeatherProvider>(
-      selector: (_, provider) => provider,
-      builder: (_, provider, __) {
+    return Consumer<WeatherProvider>(
+      builder: (context, provider, child) {
         if (provider.isLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const Center(child: CircularProgressIndicator());
         }
 
         if (provider.weather != null) {

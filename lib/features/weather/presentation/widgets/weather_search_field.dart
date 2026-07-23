@@ -31,9 +31,7 @@ class WeatherSearchField extends StatelessWidget {
         SizedBox(
           width: double.infinity,
           child: FilledButton.icon(
-            onPressed: isLoading
-                ? null
-                : () => onSearch(controller.text),
+            onPressed: isLoading ? null : () => onSearch(controller.text),
             icon: const Icon(Icons.search),
             label: const Text('Search'),
           ),

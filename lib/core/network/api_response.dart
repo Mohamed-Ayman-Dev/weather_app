@@ -1,12 +1,8 @@
-
 class ApiResponse {
   final dynamic responseData;
   final int? statusCode;
 
-  const ApiResponse({
-    required this.responseData,
-    required this.statusCode,
-  });
+  const ApiResponse({required this.responseData, required this.statusCode});
 
   @override
   String toString() {
