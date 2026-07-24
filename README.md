@@ -10,9 +10,7 @@ state management, error handling, and offline caching.
 
 ## Demo
 
-<p align="center">
-  <img src="assets/readme/demo.gif" width="320" alt="Weather App Demo"/>
-</p>
+https://github.com/user-attachments/assets/0bf87c41-28da-405e-94eb-fa06f6d301b7
 
 ---
 
