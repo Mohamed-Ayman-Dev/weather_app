@@ -1,6 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/themes/colors.dart';
+import 'package:weather_app/core/themes/gradients.dart';
+import 'package:weather_app/core/themes/shadows.dart';
+import 'package:weather_app/core/themes/text_styles.dart';
 
 import '../../data/models/weather_model.dart';
 import 'weather_condition_icon.dart';
@@ -12,8 +16,6 @@ class WeatherCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return ClipRRect(
       borderRadius: BorderRadius.circular(32),
       child: BackdropFilter(
@@ -23,20 +25,10 @@ class WeatherCard extends StatelessWidget {
           curve: Curves.easeOutCubic,
           padding: const EdgeInsets.all(28),
           decoration: BoxDecoration(
-            gradient: RadialGradient(
-              center: Alignment(-0.8, -0.9),
-              radius: 1.3,
-              colors: [Color(0xFF45278B), Color(0xFF1C1B33)],
-            ),
+            gradient: AppGradients.weatherCardGradient,
             borderRadius: BorderRadius.circular(32),
-            border: Border.all(color: Color(0XFF5936B4)),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(.30),
-                blurRadius: 35,
-                offset: const Offset(0, 18),
-              ),
-            ],
+            border: Border.all(color: AppColors.weatherCardBorderColor),
+            boxShadow: [AppShadows.weatherCardShadow],
           ),
           child: Column(
             children: [
@@ -51,18 +43,13 @@ class WeatherCard extends StatelessWidget {
                           duration: const Duration(milliseconds: 400),
                           child: Text(
                             '${weather.temperatureC?.round() ?? '--'}°',
-                            key: ValueKey(weather.temperatureC),
-                            style: theme.textTheme.displayLarge?.copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w300,
-                              height: .9,
-                            ),
+                            style: AppTextStyles.headlineLarge,
                           ),
                         ),
                         const SizedBox(height: 16),
                         Text(
                           weather.cityName ?? '',
-                          style: theme.textTheme.headlineSmall?.copyWith(
+                          style: AppTextStyles.headlineSmall.copyWith(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                           ),
@@ -70,7 +57,7 @@ class WeatherCard extends StatelessWidget {
                         const SizedBox(height: 4),
                         Text(
                           weather.country ?? '',
-                          style: theme.textTheme.bodyLarge?.copyWith(
+                          style: AppTextStyles.bodyLarge.copyWith(
                             color: Colors.white70,
                           ),
                         ),
@@ -93,7 +80,7 @@ class WeatherCard extends StatelessWidget {
                 child: Text(
                   weather.conditionText ?? '',
                   textAlign: TextAlign.center,
-                  style: theme.textTheme.titleMedium?.copyWith(
+                  style: AppTextStyles.titleMedium.copyWith(
                     color: Colors.white,
                     fontWeight: FontWeight.w600,
                   ),
@@ -113,7 +100,8 @@ class WeatherCard extends StatelessWidget {
                     const SizedBox(width: 8),
                     Text(
                       'Showing cached result',
-                      style: theme.textTheme.bodyMedium?.copyWith(
+                      style: AppTextStyles.bodySmall.copyWith(
+                        fontSize: 12,
                         color: Colors.white70,
                       ),
                     ),

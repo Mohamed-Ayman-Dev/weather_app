@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/themes/text_styles.dart';
 
 class WeatherError extends StatelessWidget {
-  const WeatherError({super.key, required this.message});
+  const WeatherError({
+    super.key,
+    required this.message,
+    required this.onTryAgain,
+  });
 
   final String message;
+  final void Function() onTryAgain;
 
   @override
   Widget build(BuildContext context) {
@@ -19,23 +25,17 @@ class WeatherError extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // const Text('⛈️', style: TextStyle(fontSize: 60)),
             const SizedBox(height: 18),
-            const Text(
+            Text(
               "Couldn't find that city",
               textAlign: TextAlign.center,
-
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Color(0xffFFB3BE),
-              ),
+              style: AppTextStyles.headlineSmall,
             ),
             const SizedBox(height: 12),
             Text(
               message,
               textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.white70, fontSize: 14),
+              style: AppTextStyles.bodySmall,
             ),
             const SizedBox(height: 28),
             FilledButton(
@@ -47,8 +47,10 @@ class WeatherError extends StatelessWidget {
                 ),
                 minimumSize: const Size(160, 52),
               ),
-              onPressed: () {},
-              child: const Text('Try Again', style: TextStyle(fontSize: 14)),
+              onPressed: () {
+                onTryAgain();
+              },
+              child: Text('Try Again', style: AppTextStyles.labelSmall),
             ),
           ],
         ),

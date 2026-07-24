@@ -1,12 +1,11 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-abstract class AppShadows {
-  static BoxShadow buttonShadow(Color color) {
-    return BoxShadow(
-      color: color.withOpacity(0.5),
-      blurRadius: 20,
-      spreadRadius: 2,
-      offset: const Offset(0, 4),
-    );
-  }
+final class AppShadows {
+  AppShadows._();
+
+  static BoxShadow weatherCardShadow = BoxShadow(
+    color: Colors.black.withOpacity(.30),
+    blurRadius: 35,
+    offset: const Offset(0, 18),
+  );
 }

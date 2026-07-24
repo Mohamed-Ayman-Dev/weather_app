@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:weather_app/core/extension/space_extensions_helper.dart';
 
 import '../../../../core/widgets/animated_switcher_wrapper.dart';
 import '../../../../core/widgets/gradient_background.dart';
 import '../providers/weather_provider.dart';
 import '../widgets/weather_card.dart';
 import '../widgets/weather_error.dart';
+import '../widgets/weather_placeholder.dart';
 import '../widgets/weather_search_field.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,6 +20,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _cityController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -40,9 +41,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    20.heightSpace,
+                    const SizedBox(height: 20),
                     _buildSearchField(),
-                    32.heightSpace,
+                    const SizedBox(height: 32),
                     _buildWeatherSection(),
                   ],
                 ),
@@ -60,6 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (_, isLoading, __) {
         return WeatherSearchField(
           controller: _cityController,
+          formKey: _formKey,
           isLoading: isLoading,
           onSearch: context.read<WeatherProvider>().searchCity,
         );
@@ -70,24 +72,29 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildWeatherSection() {
     return Consumer<WeatherProvider>(
       builder: (context, provider, child) {
-        if (provider.isLoading) {
-          return const Center(child: CircularProgressIndicator());
-        }
-
-        if (provider.weather != null) {
-          return AnimatedSwitcherWrapper(
-            child: WeatherCard(weather: provider.weather!),
-          );
-        }
-
-        if (provider.errorMessage != null) {
-          return AnimatedSwitcherWrapper(
-            child: WeatherError(message: provider.errorMessage!),
-          );
-        }
-
-        return const SizedBox.shrink();
+        return AnimatedSwitcherWrapper(child: _buildContent(provider));
       },
     );
+  }
+
+  Widget _buildContent(WeatherProvider provider) {
+    if (provider.isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    if (provider.weather != null) {
+      return WeatherCard(weather: provider.weather!);
+    }
+
+    if (provider.errorMessage != null) {
+      return WeatherError(
+        message: provider.errorMessage!,
+        onTryAgain: () {
+          provider.searchCity(_cityController.text);
+        },
+      );
+    }
+
+    return const WeatherPlaceholder();
   }
 }

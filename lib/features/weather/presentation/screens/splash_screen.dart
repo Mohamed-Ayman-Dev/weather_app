@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/widgets/animated_fade_scale_wrapper.dart';
 import 'package:weather_app/features/weather/presentation/screens/home_screen.dart';
 
 import '../../../../core/di/locator_service.dart';
@@ -18,14 +19,8 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   Future<void> _hideScreen() async {
-    Future.delayed(const Duration(milliseconds: 50), () {
-      setState(() {
-        logoOpacity = 1;
-      });
-    });
     Widget myScreen;
     String myRoute;
-    // await appSettings.getStoredLanguageAndTheme();
     myScreen = const HomeScreen();
     myRoute = HomeScreen.routeName;
     Timer(const Duration(milliseconds: 1000), () async {
@@ -43,8 +38,6 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
-  double logoOpacity = 0.0;
-
   @override
   void initState() {
     _hideScreen();
@@ -61,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [const AppLogo()],
+              children: [AnimatedFadeScaleWrapper(child: const AppLogo())],
             ),
           ],
         ),

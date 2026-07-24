@@ -17,14 +17,15 @@ class AnimatedSwitcherWrapper extends StatelessWidget {
       switchInCurve: Curves.easeOutCubic,
       switchOutCurve: Curves.easeInCubic,
       transitionBuilder: (child, animation) {
-        final offsetAnimation = Tween<Offset>(
-          begin: const Offset(0, .08),
-          end: Offset.zero,
-        ).animate(animation);
-
         return FadeTransition(
           opacity: animation,
-          child: SlideTransition(position: offsetAnimation, child: child),
+          child: SlideTransition(
+            position: Tween<Offset>(
+              begin: const Offset(0, .08),
+              end: Offset.zero,
+            ).animate(animation),
+            child: child,
+          ),
         );
       },
       child: child,

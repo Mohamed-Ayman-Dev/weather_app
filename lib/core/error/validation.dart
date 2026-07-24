@@ -1,5 +1,3 @@
-
-
 final class Validation {
   Validation._();
 

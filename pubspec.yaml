@@ -13,23 +13,8 @@ dependencies:
   provider: ^6.1.5+1
   get_it: ^9.2.1
   shared_preferences: ^2.5.5
-  internet_connection_checker: ^3.0.1
   dio: ^5.10.0
   cached_network_image: ^3.4.1
-
-flutter_native_splash:
-  color: "#FFFFFF"
-  image: assets/Group 3 (2).png
-  android_12:
-    image: assets/splashl.png
-    icon_background_color: "#FFFFFF"
-
-flutter_icons:
-  android: true
-  ios: true
-  image_path: "assets/Group 3 (2).png"
-  color: "#FFFFFF"
-  remove_alpha_ios: true
 
 dev_dependencies:
   flutter_test:
