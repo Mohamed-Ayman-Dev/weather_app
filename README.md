@@ -6,8 +6,12 @@ WeatherAPI.
 The project was built as a technical assessment with a focus on clean architecture, modular design,
 state management, error handling, and offline caching.
 
+---
+
+## Demo
+
 <p align="center">
-  <img src="assets/readme/demo.gif" width="320"/>
+  <img src="assets/readme/demo.gif" width="320" alt="Weather App Demo"/>
 </p>
 
 ---
@@ -19,13 +23,14 @@ state management, error handling, and offline caching.
     - City name
     - Country
     - Current temperature
-    - Weather condition.
-    - Weather condition icon.
+    - Weather condition
+    - Weather condition icon
 - Loading indicator while fetching data.
 - Error handling for:
     - Invalid city names.
     - Network failures.
 - Offline support using the last successful cached result.
+- Input validation.
 - Responsive layout.
 - Smooth UI animations.
 
@@ -33,22 +38,58 @@ state management, error handling, and offline caching.
 
 ## Screenshots
 
-| Home                        | Weather                        | Error                        |
-|-----------------------------|--------------------------------|------------------------------|
-| ![](assets/readme/home.png) | ![](assets/readme/weather.png) | ![](assets/readme/error.png) |
+| Weather Result                        | Invalid City                        |
+|---------------------------------------|-------------------------------------|
+| ![](assets/readme/weather-result.png) | ![](assets/readme/invalid-city.png) |
+
+| Input Validation                  | Offline Cache                        |
+|-----------------------------------|--------------------------------------|
+| ![](assets/readme/validation.png) | ![](assets/readme/offline-cache.png) |
+
+---
+
+## Offline Caching
+
+The application stores the last successful weather response using **SharedPreferences**.
+
+Cached data is returned **only** for network-related failures such as:
+
+- No internet connection
+- Connection timeout
+- Request timeout
+
+API errors (for example, an invalid city name) always display the server error instead of cached
+data.
 
 ---
 
 ## Technical Decisions
 
-- Followed a simplified Clean Architecture approach.
+- Followed a simplified **Clean Architecture** approach.
 - Used **Provider** for lightweight state management.
-- Applied the **Repository Pattern** to isolate the presentation layer from data sources.
+- Applied the **Repository Pattern** to separate the presentation layer from data sources.
 - Used **GetIt** for dependency injection.
 - Cached the last successful weather response using **SharedPreferences**.
-- Returned cached data only for network-related failures while preserving API errors such as invalid
-  city names.
-- Centralized colors, typography, and reusable widgets to keep the UI consistent.
+- Returned cached data only for network-related failures while preserving API errors.
+- Centralized colors, typography, and reusable widgets for a consistent UI.
+
+---
+
+## Project Architecture
+
+```
+Presentation
+     │
+     ▼
+Repository
+     │
+     ▼
+Data Sources
+(Remote + Local)
+     │
+     ▼
+WeatherAPI + SharedPreferences
+```
 
 ---
 
@@ -139,7 +180,7 @@ flutter run
 
 ## Notes
 
-This project was developed as a technical assessment.
+This project was developed as part of a Flutter technical assessment.
 
 For simplicity, the API key is included in the project. In production environments, API keys should
 be managed securely through a backend service or another protected solution.
@@ -148,6 +189,6 @@ be managed securely through a backend service or another protected solution.
 
 ## Author
 
-Mohamed Ayman
+**Mohamed Ayman**
 
 GitHub: https://github.com/Mohamed-Ayman-Dev
