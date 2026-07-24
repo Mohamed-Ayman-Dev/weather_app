@@ -36,18 +36,6 @@ state management, error handling, and offline caching.
 
 ---
 
-## Screenshots
-
-| Weather Result                         | Invalid City                         |
-|----------------------------------------|--------------------------------------|
-| ![](assets/readme/weather-result.jpeg) | ![](assets/readme/invalid-city.jpeg) |
-
-| Input Validation                   | Offline Cache                         |
-|------------------------------------|---------------------------------------|
-| ![](assets/readme/validation.jpeg) | ![](assets/readme/offline-cache.jpeg) |
-
----
-
 ## Offline Caching
 
 The application stores the last successful weather response using **SharedPreferences**.
@@ -122,6 +110,36 @@ lib
 │
 ├── app.dart
 └── main.dart
+```
+
+This project follows **Clean Architecture** principles with clear separation of concerns:
+
+```
+┌─────────────────────────────────────────────────────────┐
+│         Presentation Layer (UI & State)                  │
+│  - Screens, Widgets, Providers (UI Logic & State)       │
+└─────────────────────────────────────────────────────────┘
+                          ↓
+┌─────────────────────────────────────────────────────────┐
+│         Domain Layer (Business Logic)                    │
+│  - Repository Interface, Use Cases, Entities            │
+└─────────────────────────────────────────────────────────┘
+                          ↓
+┌─────────────────────────────────────────────────────────┐
+│         Data Layer (Data Access)                         │
+│  - Repository Implementation                             │
+│  - Remote Data Source (WeatherAPI)                       │
+│  - Local Data Source (SharedPreferences)                 │
+│  - Models (API & Cache Serialization)                   │
+└─────────────────────────────────────────────────────────┘
+                          ↓
+┌─────────────────────────────────────────────────────────┐
+│         Core Layer (Infrastructure)                      │
+│  - Network (API Client, Interceptors, Endpoints)        │
+│  - Caching (CacheHelper)                                │
+│  - Dependency Injection (Service Locator)               │
+│  - Themes, Constants, Services, Widgets                │
+└─────────────────────────────────────────────────────────┘
 ```
 
 ---
