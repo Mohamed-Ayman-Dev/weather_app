@@ -38,13 +38,13 @@ state management, error handling, and offline caching.
 
 ## Screenshots
 
-| Weather Result                        | Invalid City                        |
-|---------------------------------------|-------------------------------------|
-| ![](assets/readme/weather-result.png) | ![](assets/readme/invalid-city.png) |
+| Weather Result                         | Invalid City                         |
+|----------------------------------------|--------------------------------------|
+| ![](assets/readme/weather-result.jpeg) | ![](assets/readme/invalid-city.jpeg) |
 
-| Input Validation                  | Offline Cache                        |
-|-----------------------------------|--------------------------------------|
-| ![](assets/readme/validation.png) | ![](assets/readme/offline-cache.png) |
+| Input Validation                   | Offline Cache                         |
+|------------------------------------|---------------------------------------|
+| ![](assets/readme/validation.jpeg) | ![](assets/readme/offline-cache.jpeg) |
 
 ---
 
