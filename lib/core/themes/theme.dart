@@ -7,49 +7,14 @@ import 'colors.dart';
 export 'colors.dart';
 export 'gradients.dart';
 
-abstract class CustomTheme {
+abstract final class CustomTheme {
   static ThemeData darkTheme = ThemeData(
     fontFamily: AppConstant.fontFamily,
     highlightColor: AppColors.primaryColor.withOpacity(0.2),
     primaryColor: AppColors.primaryColor,
-
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      selectedItemColor: AppColors.primaryColor,
-      unselectedItemColor: AppColors.backgroundColor,
-      elevation: 0,
-      showSelectedLabels: false,
-      type: BottomNavigationBarType.fixed,
-      showUnselectedLabels: false,
-      backgroundColor: AppColors.navBarBackgroundColor,
-      selectedIconTheme: IconThemeData(color: AppColors.primaryColor),
-      unselectedIconTheme: IconThemeData(color: AppColors.backgroundColor),
-    ),
-    scrollbarTheme: ScrollbarThemeData(
-      trackColor: WidgetStateProperty.all(AppColors.primaryColor),
-      thumbColor: WidgetStateProperty.all(
-        AppColors.primaryColor.withOpacity(0.7),
-      ),
-      trackBorderColor: WidgetStateProperty.all(AppColors.primaryColor),
-    ),
     splashColor: AppColors.primaryColor,
-    colorScheme: const ColorScheme.light(primary: AppColors.primaryColor),
+    colorScheme: const ColorScheme.dark(primary: AppColors.primaryColor),
     scaffoldBackgroundColor: AppColors.backgroundColor,
-    floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor: AppColors.primaryColor,
-      foregroundColor: Colors.white,
-    ),
-    appBarTheme: const AppBarTheme(
-      backgroundColor: AppColors.appBarBackGroundColor,
-      elevation: 0,
-      centerTitle: true,
-      titleTextStyle: TextStyle(
-        fontSize: 20,
-        color: AppColors.tileTextColor,
-        fontWeight: FontWeight.bold,
-        fontFamily: AppConstant.fontFamily,
-      ),
-    ),
-    listTileTheme: const ListTileThemeData(textColor: AppColors.tileTextColor),
     textTheme: TextTheme(
       bodySmall: AppTextStyles.bodySmall,
       bodyMedium: AppTextStyles.bodyMedium,
@@ -58,8 +23,8 @@ abstract class CustomTheme {
       labelSmall: AppTextStyles.labelSmall,
       titleLarge: AppTextStyles.titleLarge,
     ),
-    textSelectionTheme: const TextSelectionThemeData(
-      cursorColor: Color(0xFF8B8B8B),
+    textSelectionTheme: TextSelectionThemeData(
+      cursorColor: AppColors.cursorColor,
     ),
     iconButtonTheme: IconButtonThemeData(
       style: ButtonStyle(
@@ -68,7 +33,7 @@ abstract class CustomTheme {
     ),
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(
-        backgroundColor: const Color(0xFF1C1B33).withOpacity(0.5),
+        backgroundColor: AppColors.filledButtonBkColor,
         foregroundColor: Colors.black,
         shape: const CircleBorder(),
         padding: EdgeInsets.zero,
@@ -110,7 +75,10 @@ abstract class CustomTheme {
 
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(28),
-        borderSide: const BorderSide(color: Color(0xff8DBBFF), width: 1.6),
+        borderSide: const BorderSide(
+          color: AppColors.focusedBorderColor,
+          width: 1.6,
+        ),
       ),
     ),
   );

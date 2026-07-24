@@ -1,9 +1,7 @@
-/// Immutable data model for a single "current weather" lookup.
+/// Immutable model representing the current weather.
 ///
-/// Kept intentionally flat (no nested location/current sub-objects) because
-/// nothing else in this app needs the raw API shape — the UI only ever
-/// needs these fields
-
+/// The model is intentionally flattened to expose only the fields
+/// required by the application.
 class WeatherModel {
   final String? cityName;
   final String? country;
@@ -23,7 +21,7 @@ class WeatherModel {
     this.isFromCache = false,
   });
 
-  /// Parses the response shape returned by api.weatherapi.com/v1/current.json
+  /// Parses the response returned by the Weather API.
   factory WeatherModel.fromApiJson(Map<String, dynamic> json) {
     final location = json['location'] as Map<String, dynamic>?;
     final current = json['current'] as Map<String, dynamic>?;
@@ -54,6 +52,7 @@ class WeatherModel {
     isFromCache: isFromCache ?? this.isFromCache,
   );
 
+  /// Converts the model into a JSON object for local caching.
   Map<String, dynamic> toCacheJson() => {
     'cityName': cityName,
     'country': country,
@@ -63,6 +62,7 @@ class WeatherModel {
     'conditionCode': conditionCode,
   };
 
+  /// Creates a model from cached data.
   factory WeatherModel.fromCacheJson(Map<String, dynamic> json) => WeatherModel(
     cityName: json['cityName'] as String?,
     country: json['country'] as String?,

@@ -1,5 +1,7 @@
 import '../error/exceptions.dart';
 
+/// Represents the result of an API call, which can be either
+/// a successful response or a failure.
 sealed class ApiResult<T> {
   const ApiResult();
 

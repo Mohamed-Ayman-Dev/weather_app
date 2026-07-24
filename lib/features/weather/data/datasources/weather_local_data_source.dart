@@ -5,10 +5,9 @@ import 'package:weather_app/core/constants/app_constant.dart';
 import '../../../../core/cache/cache_helper.dart';
 import '../models/weather_model.dart';
 
-/// Reads/writes the last successfully fetched weather result via the
-/// shared [CacheHelper]. Only knows about storage — the repository decides
-/// when to call it and what "isFromCache" means for the UI.
-
+/// Handles caching of the last successful weather response using [CacheHelper].
+///
+/// The repository decides when cached data should be used.
 class WeatherLocalDataSource {
   WeatherLocalDataSource(this._cacheHelper);
 

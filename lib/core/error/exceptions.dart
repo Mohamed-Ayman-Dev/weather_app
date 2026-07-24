@@ -9,9 +9,11 @@ class ApiException implements Exception {
 
   const ApiException({required this.message, this.statusCode, this.data});
 
-  /// if status code is null means ( no internet connection or timeout ... ), fallback to cache
+  /// Network-related errors (e.g. no internet or timeout) have no HTTP status
+  /// code, so cached data can be used as a fallback.
   bool get shouldFallbackToCache => statusCode == null;
 
+  /// Creates an [ApiException] from a [DioException].
   factory ApiException.fromDioException(DioException exception) {
     final statusCode = exception.response?.statusCode;
     final responseData = _decode(exception.response?.data);
@@ -23,6 +25,7 @@ class ApiException implements Exception {
     );
   }
 
+  /// Decode string responses into JSON when possible.
   static dynamic _decode(dynamic data) {
     if (data is String) {
       try {
@@ -34,6 +37,8 @@ class ApiException implements Exception {
     return data;
   }
 
+  /// Prefer the backend error message, otherwise return
+  /// a user-friendly message based on the Dio error type.
   static String _extractMessage(DioException exception, dynamic responseData) {
     if (responseData is Map<String, dynamic>) {
       final backendMessage =

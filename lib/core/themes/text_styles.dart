@@ -27,7 +27,7 @@ abstract class AppTextStyles {
   static TextStyle headlineSmall = TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.bold,
-    color: AppColors.headlineRedTextColor,
+    color: AppColors.errorHeadlineColor,
     fontFamily: AppConstant.fontFamily,
   );
   static TextStyle labelSmall = TextStyle(

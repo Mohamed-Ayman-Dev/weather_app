@@ -22,7 +22,8 @@ class _AnimatedFadeScaleWrapperState extends State<AnimatedFadeScaleWrapper> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
+    // Start the entrance animation after the first frame is rendered.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
         _scale = 1.0;
         _opacity = 1.0;

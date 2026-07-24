@@ -25,7 +25,7 @@ class WeatherCard extends StatelessWidget {
           curve: Curves.easeOutCubic,
           padding: const EdgeInsets.all(28),
           decoration: BoxDecoration(
-            gradient: AppGradients.weatherCardGradient,
+            gradient: AppGradients.primaryGradient,
             borderRadius: BorderRadius.circular(32),
             border: Border.all(color: AppColors.weatherCardBorderColor),
             boxShadow: [AppShadows.weatherCardShadow],
@@ -43,6 +43,7 @@ class WeatherCard extends StatelessWidget {
                           duration: const Duration(milliseconds: 400),
                           child: Text(
                             '${weather.temperatureC?.round() ?? '--'}°',
+                            key: ValueKey(weather.temperatureC),
                             style: AppTextStyles.headlineLarge,
                           ),
                         ),
@@ -88,6 +89,7 @@ class WeatherCard extends StatelessWidget {
               ),
 
               if (weather.isFromCache) ...[
+                // Indicate that the displayed data comes from the local cache.
                 const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

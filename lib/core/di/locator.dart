@@ -15,15 +15,15 @@ import '../services/navigation_service.dart';
 GetIt locator = GetIt.instance;
 
 Future<void> setupServices() async {
-  /// register Cache
+  /// Register local storage and cache services.
   final pref = await SharedPreferences.getInstance();
   locator.registerLazySingleton<SharedPreferences>(() => pref);
   locator.registerLazySingleton<CacheHelper>(() => CacheHelper(locator()));
 
-  /// register Navigation
+  /// Register navigation service.
   locator.registerLazySingleton<NavigationService>(() => NavigationService());
 
-  /// register Network
+  /// Register networking dependencies.
   locator.registerLazySingleton<AppInterceptors>(() => AppInterceptors());
 
   locator.registerLazySingleton<Dio>(() => Dio());
@@ -31,7 +31,7 @@ Future<void> setupServices() async {
     () => ApiClient(dio: locator(), appInterceptors: locator()),
   );
 
-  /// register Data Sources
+  /// Register data sources.
   locator.registerLazySingleton<WeatherRemoteDataSource>(
     () => WeatherRemoteDataSourceImpl(locator()),
   );
@@ -40,7 +40,7 @@ Future<void> setupServices() async {
     () => WeatherLocalDataSource(locator()),
   );
 
-  /// register Repository
+  /// Register repository.
   locator.registerLazySingleton<WeatherRepository>(
     () => WeatherRepositoryImpl(
       remoteDataSource: locator(),
@@ -48,6 +48,6 @@ Future<void> setupServices() async {
     ),
   );
 
-  /// Providers
+  /// Register state management providers.
   locator.registerFactory<WeatherProvider>(() => WeatherProvider(locator()));
 }

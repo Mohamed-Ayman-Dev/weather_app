@@ -20,6 +20,7 @@ class ApiClient {
       ..sendTimeout = const Duration(seconds: 30)
       ..receiveDataWhenStatusError = true;
     if (kDebugMode) {
+      // Log requests and responses only during development.
       dio.interceptors.add(const PrettyDioLogger());
     }
     dio.interceptors.add(appInterceptors);
@@ -43,6 +44,7 @@ class ApiClient {
         statusCode: response.statusCode,
       );
     } on DioException catch (e) {
+      // Convert Dio exceptions into a unified application exception.
       throw ApiException.fromDioException(e);
     } catch (e, stackTrace) {
       Error.throwWithStackTrace(
@@ -67,67 +69,10 @@ class ApiClient {
         options: options,
         cancelToken: cancelToken,
         data: (hasMultipartData && data != null)
+            // Convert request body to FormData for multipart requests.
             ? FormData.fromMap(data)
             : data,
       );
-      return ApiResponse(
-        responseData: response.data,
-        statusCode: response.statusCode,
-      );
-    } on DioException catch (e) {
-      throw ApiException.fromDioException(e);
-    } catch (e, stackTrace) {
-      Error.throwWithStackTrace(
-        ApiException(message: e.toString()),
-        stackTrace,
-      );
-    }
-  }
-
-  Future<ApiResponse> put(
-    String path, {
-    Map<String, dynamic>? data,
-    Map<String, dynamic>? queryParameters,
-    CancelToken? cancelToken,
-    Options? options,
-  }) async {
-    try {
-      final response = await dio.put(
-        path,
-        data: data,
-        queryParameters: queryParameters,
-        cancelToken: cancelToken,
-        options: options,
-      );
-
-      return ApiResponse(
-        responseData: response.data,
-        statusCode: response.statusCode,
-      );
-    } on DioException catch (e) {
-      throw ApiException.fromDioException(e);
-    } catch (e, stackTrace) {
-      Error.throwWithStackTrace(
-        ApiException(message: e.toString()),
-        stackTrace,
-      );
-    }
-  }
-
-  Future<ApiResponse> delete(
-    String path, {
-    Map<String, dynamic>? queryParameters,
-    CancelToken? cancelToken,
-    Options? options,
-  }) async {
-    try {
-      final response = await dio.delete(
-        path,
-        queryParameters: queryParameters,
-        cancelToken: cancelToken,
-        options: options,
-      );
-
       return ApiResponse(
         responseData: response.data,
         statusCode: response.statusCode,

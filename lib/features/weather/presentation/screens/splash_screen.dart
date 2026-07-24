@@ -19,17 +19,14 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   Future<void> _hideScreen() async {
-    Widget myScreen;
-    String myRoute;
-    myScreen = const HomeScreen();
-    myRoute = HomeScreen.routeName;
+    // Keep the splash visible briefly, then navigate with a fade transition.
     Timer(const Duration(milliseconds: 1000), () async {
       await LocatorService.navigationService.currentState?.pushReplacement(
         PageRouteBuilder(
           opaque: true,
-          settings: RouteSettings(name: myRoute),
+          settings: RouteSettings(name: HomeScreen.routeName),
           transitionDuration: const Duration(milliseconds: 900),
-          pageBuilder: (BuildContext context, _, __) => myScreen,
+          pageBuilder: (BuildContext context, _, __) => const HomeScreen(),
           transitionsBuilder:
               (_, Animation<double> animation, __, Widget child) =>
                   FadeTransition(opacity: animation, child: child),

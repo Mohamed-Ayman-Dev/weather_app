@@ -14,12 +14,6 @@ class WeatherProvider extends ChangeNotifier {
 
   Future<void> searchCity(String cityName) async {
     final city = cityName.trim();
-    // Validate the user input before making the API request.
-    if (city.isEmpty) {
-      errorMessage = 'Please enter a city name.';
-      notifyListeners();
-      return;
-    }
     isLoading = true;
     errorMessage = null;
     notifyListeners();

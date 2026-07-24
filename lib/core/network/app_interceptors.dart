@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 class AppInterceptors extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    // Common headers for all requests.
+    /// Add common headers to every request.
     options.headers.addAll({'Accept': 'application/json'});
 
     handler.next(options);

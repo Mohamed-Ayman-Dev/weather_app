@@ -47,9 +47,7 @@ class WeatherError extends StatelessWidget {
                 ),
                 minimumSize: const Size(160, 52),
               ),
-              onPressed: () {
-                onTryAgain();
-              },
+              onPressed: onTryAgain,
               child: Text('Try Again', style: AppTextStyles.labelSmall),
             ),
           ],

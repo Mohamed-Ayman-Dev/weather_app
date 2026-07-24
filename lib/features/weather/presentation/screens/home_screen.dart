@@ -72,6 +72,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildWeatherSection() {
     return Consumer<WeatherProvider>(
       builder: (context, provider, child) {
+        // Animate transitions between loading, success, error,
+        // and placeholder states.
         return AnimatedSwitcherWrapper(child: _buildContent(provider));
       },
     );

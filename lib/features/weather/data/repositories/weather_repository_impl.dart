@@ -25,6 +25,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
       _localDataSource.cacheWeather(weather);
       return ApiResult.success(weather);
     } on ApiException catch (e) {
+      // Fall back to cached data only for network-related failures.
       if (e.shouldFallbackToCache) {
         final cachedWeather = await _localDataSource.getLastCachedWeather();
         if (cachedWeather != null) {
