@@ -72,6 +72,16 @@ This project follows **Clean Architecture** principles with clear separation of 
 
 ---
 
+## Technical Decisions
+
+- Used Provider for lightweight state management.
+- Followed a simplified Clean Architecture structure.
+- Implemented a repository pattern to separate data sources from the presentation layer.
+- Cached the last successful weather response for offline support.
+- Returned cached data only for network-related failures, while preserving API errors such as
+  invalid city names.
+- Used reusable widgets and centralized theming to keep the UI consistent.
+
 ## Tech Stack
 
 | Category                 | Technology                 |
