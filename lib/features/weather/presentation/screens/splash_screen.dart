@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/features/weather/presentation/screens/home_screen.dart';
 
 import '../../../../core/di/locator_service.dart';
-import '../widgets/gradient_background.dart';
+import '../../../../core/widgets/app_logo.dart';
+import '../../../../core/widgets/gradient_background.dart';
 
 class SplashScreen extends StatefulWidget {
   static const routeName = '/splash';
@@ -55,20 +56,13 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: GradientBackground(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //
-            //   children: [const AppLogo()],
-            // ),
-            // 320.heightSpace,
-            Text(
-              '${"S.of(context).version"} 1.8.2',
-              style: TextStyle(color: Colors.black),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [const AppLogo()],
             ),
-            // 30.heightSpace,
           ],
         ),
       ),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_app/core/extension/space_extensions_helper.dart';
 
+import '../../../../core/widgets/animated_switcher_wrapper.dart';
+import '../../../../core/widgets/gradient_background.dart';
 import '../providers/weather_provider.dart';
-import '../widgets/gradient_background.dart';
 import '../widgets/weather_card.dart';
 import '../widgets/weather_error.dart';
 import '../widgets/weather_search_field.dart';
@@ -31,19 +33,18 @@ class _HomeScreenState extends State<HomeScreen> {
       body: GradientBackground(
         child: SafeArea(
           child: Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 450),
-              child: Padding(
-                padding: const EdgeInsets.all(24),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      _buildSearchField(),
-                      const SizedBox(height: 32),
-                      _buildWeatherSection(),
-                    ],
-                  ),
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    20.heightSpace,
+                    _buildSearchField(),
+                    32.heightSpace,
+                    _buildWeatherSection(),
+                  ],
                 ),
               ),
             ),
@@ -74,11 +75,15 @@ class _HomeScreenState extends State<HomeScreen> {
         }
 
         if (provider.weather != null) {
-          return WeatherCard(weather: provider.weather!);
+          return AnimatedSwitcherWrapper(
+            child: WeatherCard(weather: provider.weather!),
+          );
         }
 
         if (provider.errorMessage != null) {
-          return WeatherError(message: provider.errorMessage!);
+          return AnimatedSwitcherWrapper(
+            child: WeatherError(message: provider.errorMessage!),
+          );
         }
 
         return const SizedBox.shrink();

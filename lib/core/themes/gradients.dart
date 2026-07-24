@@ -8,7 +8,7 @@ abstract final class AppGradients {
   static const bkGradient = RadialGradient(
     center: Alignment(-0.8, -0.9),
     radius: 1.3,
-    colors: [Color(0xFF45278B), Color(0xFF2E335A)],
+    colors: [Color(0xFF45278B), Color(0xFF1C1B33)],
   );
 
   static const buttonGradient = LinearGradient(

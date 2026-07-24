@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/themes/gradients.dart';
+import '../themes/gradients.dart';
 
 class GradientBackground extends StatelessWidget {
   const GradientBackground({super.key, required this.child});

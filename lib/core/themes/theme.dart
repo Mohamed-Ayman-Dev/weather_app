@@ -8,10 +8,7 @@ export 'colors.dart';
 export 'gradients.dart';
 
 abstract class CustomTheme {
-  // Contains the information about the light theme
-
   static InputDecoration outlinedBorderInputDecoration = InputDecoration(
-    // contentPadding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
     hintStyle: AppTextStyles.labelSmall,
     filled: true,
     focusColor: AppColors.primaryColor,
@@ -37,8 +34,7 @@ abstract class CustomTheme {
       borderSide: BorderSide(color: AppColors.errorTextColor),
     ),
   );
-  static ThemeData lightTheme = ThemeData(
-    // visualDensity: VisualDensity.adaptivePlatformDensity,
+  static ThemeData darkTheme = ThemeData(
     fontFamily: AppConstant.fontFamily,
     highlightColor: AppColors.primaryColor.withOpacity(0.2),
     primaryColor: AppColors.primaryColor,

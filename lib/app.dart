@@ -25,8 +25,8 @@ class _MyAppState extends State<MyApp> {
         navigatorKey: LocatorService.navigationService.navigatorKey,
         title: AppConstant.appName,
         color: Colors.white,
-        themeMode: ThemeMode.light,
-        theme: CustomTheme.lightTheme,
+        themeMode: ThemeMode.dark,
+        theme: CustomTheme.darkTheme,
         initialRoute: Routes.initialRoute,
 
         routes: Routes.routes,
