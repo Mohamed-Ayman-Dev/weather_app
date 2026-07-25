@@ -110,35 +110,7 @@ lib
 └── main.dart
 ```
 
-This project follows **Clean Architecture** principles with clear separation of concerns:
-
-```
-┌─────────────────────────────────────────────────────────┐
-│         Presentation Layer (UI & State)                  │
-│  - Screens, Widgets, Providers (UI Logic & State)       │
-└─────────────────────────────────────────────────────────┘
-                          ↓
-┌─────────────────────────────────────────────────────────┐
-│         Domain Layer (Business Logic)                    │
-│  - Repository Interface, Use Cases, Entities            │
-└─────────────────────────────────────────────────────────┘
-                          ↓
-┌─────────────────────────────────────────────────────────┐
-│         Data Layer (Data Access)                         │
-│  - Repository Implementation                             │
-│  - Remote Data Source (WeatherAPI)                       │
-│  - Local Data Source (SharedPreferences)                 │
-│  - Models (API & Cache Serialization)                   │
-└─────────────────────────────────────────────────────────┘
-                          ↓
-┌─────────────────────────────────────────────────────────┐
-│         Core Layer (Infrastructure)                      │
-│  - Network (API Client, Interceptors, Endpoints)        │
-│  - Caching (CacheHelper)                                │
-│  - Dependency Injection (Service Locator)               │
-│  - Themes, Constants, Services, Widgets                │
-└─────────────────────────────────────────────────────────┘
-```
+This project follows **Clean Architecture** principles with clear separation of concerns.
 
 ---
 
