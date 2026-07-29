@@ -1,4 +1,4 @@
-# Weather App
+# Weather App Technical Assessment
 
 A Flutter application that fetches and displays real-time weather information for any city using
 WeatherAPI.
